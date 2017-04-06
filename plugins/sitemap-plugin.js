@@ -1,5 +1,5 @@
 var _ = require("lodash");
-var mkdirp = require("mkdirp-promise/lib/node4");
+var mkdirp = require("mkdirp-then");
 var path = require("path");
 var fs = require("mz/fs");
 var colors = require("colors");

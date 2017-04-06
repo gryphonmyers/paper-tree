@@ -4,7 +4,7 @@ var path = require("path");
 var del = require("del");
 var fs = require("mz/fs");
 var colors = require("colors");
-var mkdirp = require("mkdirp-promise/lib/node4");
+var mkdirp = require("mkdirp-then");
 
 //LOCAL DEPENDENCIES
 var getTransform = require("./get-transform");

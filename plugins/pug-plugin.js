@@ -1,6 +1,7 @@
 var pug = require("pug");
 var _ = require("lodash");
 var fs = require("mz/fs");
+var path = require("path");
 
 var defaultSiteTemplateOpts = {
     baseTemplatePath: "./source/templates",

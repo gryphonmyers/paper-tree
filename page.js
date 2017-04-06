@@ -1,7 +1,7 @@
 //NPM DEPENDENCIES
 var path = require("path");
 var fs = require("mz/fs");
-var mkdirp = require("mkdirp-promise/lib/node4");
+var mkdirp = require("mkdirp-then");
 
 //LOCAL DEPENDENCIES
 var getTransform = require("./get-transform");
