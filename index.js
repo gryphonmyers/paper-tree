@@ -27,7 +27,7 @@ var defaultOpts = {
     classes: {Page,SiteTemplate,PageTemplate}
 };
 
-function buildSite(siteBlueprint, opts){
+function paperTree(siteBlueprint, opts){
 
     opts = _.defaults(opts, defaultOpts);
 
@@ -68,6 +68,6 @@ function buildSite(siteBlueprint, opts){
     return site.build(opts);
 }
 
-buildSite.get = get;
+paperTree.get = get;
 
-module.exports = buildSite;
+module.exports = paperTree;
