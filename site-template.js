@@ -148,39 +148,47 @@ class SiteTemplate  {
                                                                             var hash = hashCode(contentToWrite);
                                                                             return page.getTransformedFilePath(buildOpts)
                                                                                 .then(function(filePath){
-                                                                                    return fs.open(filePath, 'r+')
+                                                                                    return fs.open(filePath, 'r')
                                                                                         .then(function(fileDescriptor){
                                                                                             var promise = Promise.resolve();
                                                                                             if (buildOpts.skipUnchanged) {
                                                                                                 if (hashMap) {
+                                                                                                    promise = promise
+                                                                                                        .then(function(){
+                                                                                                            return fs.close(fileDescriptor);
+                                                                                                        })
                                                                                                     if (hashMap[filePath] != hash) {
                                                                                                         statusCode = 1;
-                                                                                                        promise = page.writeInto(buildOpts, fileDescriptor, contentToWrite);
+                                                                                                        promise = page.writeInto(buildOpts, filePath, contentToWrite);
                                                                                                     } else {
                                                                                                         statusCode = 2;
                                                                                                     }
                                                                                                 } else {
                                                                                                     promise = fs.readFile(fileDescriptor, {encoding:'utf8'})
                                                                                                         .then(function(readBuffer){
-                                                                                                            if (hashCode(readBuffer) != hash) {
-                                                                                                                statusCode = 1;
-                                                                                                                return page.writeInto(buildOpts, fileDescriptor, contentToWrite);
-                                                                                                            } else {
-                                                                                                                statusCode = 2;
-                                                                                                            }
+                                                                                                            return fs.close(fileDescriptor)
+                                                                                                                .then(function(){
+                                                                                                                    if (hashCode(readBuffer) != hash) {
+                                                                                                                        statusCode = 1;
+                                                                                                                        return page.writeInto(buildOpts, filePath, contentToWrite);
+                                                                                                                    } else {
+                                                                                                                        statusCode = 2;
+                                                                                                                    }
+                                                                                                                });
                                                                                                         }, function(){
                                                                                                             throw err;
                                                                                                         });
                                                                                                 }
                                                                                             } else {
                                                                                                 statusCode = 1;
-                                                                                                promise = page.writeInto(buildOpts, fileDescriptor, contentToWrite);
+                                                                                                promise = fs.close(fileDescriptor)
+                                                                                                    .then(function(){
+                                                                                                        return page.writeInto(buildOpts, filePath, contentToWrite);
+                                                                                                    });
                                                                                             }
 
-                                                                                            return promise
-                                                                                                .then(function(){
-                                                                                                    return fs.close(fileDescriptor);
-                                                                                                });
+                                                                                            return promise;
+
                                                                                         }, function(err){
                                                                                             return mkdirp(page.getDirPath(buildOpts))
                                                                                                 .then(function(){
