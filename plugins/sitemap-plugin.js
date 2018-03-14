@@ -4,7 +4,7 @@ var path = require("path");
 var fs = require("mz/fs");
 var colors = require("colors");
 var getTransform = require("../get-transform");
-
+const json = require('big-json');
 var defaultOpts = {
     siteMapPath: 'public_html',
     siteMapFileName: 'sitemap.json'
@@ -61,7 +61,24 @@ module.exports = function(opts){
                         return getTransform("siteMap", self.buildOpts.transforms).call(self, siteMap);
                     })
                     .then(function(siteMap){
-                        return fs.writeFile(path.format({dir:opts.siteMapPath, base: opts.siteMapFileName}), JSON.stringify(siteMap))
+                        const stringifyStream = json.createStringifyStream({
+                            body: siteMap
+                        });
+                        var promise = new Promise(function(resolve){
+                            var siteMapPath = path.format({dir:opts.siteMapPath, base: opts.siteMapFileName});
+                            console.log("Writing JSON sitemap to", siteMapPath);
+                            var writer = fs.createWriteStream(siteMapPath);
+
+                            stringifyStream.pipe(writer);
+
+                            stringifyStream.on('end', function(){
+                                writer.end();
+                                resolve();
+                                console.log("Done writing JSON string");
+                            })
+                        });
+                        
+                        return promise;
                     })
                     .then(function(){
                         console.log("Wrote sitemap");
