@@ -1,0 +1,28 @@
+{
+  "name": "paper-tree-worker-pool",
+  "version": "1.0.0",
+  "description": "",
+  "main": "./src/node.js",
+  "browser": "./src/browser.js",
+  "types": "./dist/node.d.ts",
+  "type": "module",
+  "scripts": {
+    "test": "vitest run --coverage",
+    "type-check": "tsc --noEmit",
+    "build": "rimraf dist && tsc --project tsconfig-dec.json",
+    "clean": "rimraf dist && rimraf coverage && rimraf node_modules"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^18.15.11",
+    "@vitest/coverage-c8": "^0.30.0",
+    "rimraf": "^4.4.1",
+    "typescript": "^5.0.3",
+    "vitest": "^0.30.0"
+  },
+  "dependencies": {
+    "callsites": "^4.0.0"
+  },
+  "sideEffects": false
+}

@@ -1,15 +1,24 @@
 {
-  "name": "paper-tree",
-  "version": "0.1.4",
-  "description": "A static site generator that tries not to tell you where you get your data or what to do with it.",
+  "name": "paper-tree-monorepo",
+  "version": "0.2.0",
+  "description": "Fast, flexible Node.js static site generator.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "prepare": "husky install",
+    "start": "node -r dotenv/config .",
+    "dev": "NODE_ENV=development node -r dotenv/config .",
+    "type-check": "npm run type-check --workspaces --if-present",
+    "test": "vitest run --coverage",
+    "build": "npm run build --workspaces --if-present",
+    "clean": "npm run clean --workspaces --if-present && rimraf node_modules"
   },
   "repository": {
     "type": "git",
     "url": "git+ssh://git@github.com/gryphonmyers/paper-tree.git"
   },
+  "workspaces": [
+    "packages/*"
+  ],
   "keywords": [
     "html",
     "static",
@@ -23,16 +32,8 @@
   },
   "homepage": "https://github.com/gryphonmyers/paper-tree#readme",
   "dependencies": {
-    "big-json": "^2.0.0",
-    "colors": "^1.1.2",
-    "mkdirp-then": "^1.2.0",
-    "mz": "^2.6.0",
-    "node-fetch": "^1.6.3"
   },
   "devDependencies": {
-    "del": "^2.2.2",
-    "lodash": "^4.17.4",
-    "path": "^0.12.7",
-    "pug": "^2.0.0-beta11"
+    "husky": "^8.0.3"
   }
 }

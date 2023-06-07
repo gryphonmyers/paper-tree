@@ -1,0 +1,23 @@
+{
+    "compilerOptions": {
+        "allowJs": true,
+        "noEmit": true,
+        "outDir": "dist",
+        "target": "esnext",
+        "module": "NodeNext",
+        "resolveJsonModule": true,
+        "lib": ["esnext", "DOM"],
+        "skipLibCheck": false,
+        "skipDefaultLibCheck": true,
+        "checkJs": true,
+        "maxNodeModuleJsDepth": 0,
+        "strict": false,
+        "noImplicitAny": true,
+        "noImplicitThis": true,
+        "alwaysStrict": true,
+        "baseUrl": ".",
+        "esModuleInterop": true,
+        "types": []
+    },
+    "include": ["./src/**/*.d.ts"]
+}

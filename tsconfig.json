@@ -1,0 +1,26 @@
+{
+    "compilerOptions": {
+        "allowJs": true,
+        "declaration": true,
+        "noEmit": true,
+        "declarationDir": "dist",
+        "declarationMap": true,
+        "outDir": "dist",
+        "target": "ESNext",
+        "module": "NodeNext",
+        "resolveJsonModule": true,
+        "lib": ["esnext", "DOM"],
+        "skipLibCheck": true,
+        "skipDefaultLibCheck": true,
+        "checkJs": true,
+        "maxNodeModuleJsDepth": 0,
+        "strict": false,
+        "noImplicitAny": true,
+        "noImplicitThis": true,
+        "alwaysStrict": true,
+        "baseUrl": "./src/",
+        "esModuleInterop": true,
+        "types": ["@alfatask/shared-domain-types", "@alfatask/shared-application-types"]
+    },
+    "exclude": ["./node_modules/**/*"]
+  }

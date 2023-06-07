@@ -1,0 +1,18 @@
+{
+  "name": "paper-tree-ambient-types",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "type-check": "tsc --noEmit",
+    "clean": "rimraf node_modules"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@vitest/coverage-c8": "^0.30.0",
+    "rimraf": "^4.4.1",
+    "typescript": "^5.0.3",
+    "vitest": "^0.30.0"
+  },
+  "types": "./src/index"
+}
